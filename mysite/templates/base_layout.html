@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}FirstLab{% endblock title %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=6">
 </head>
 <body>
 <header class="site-header">
@@ -14,6 +14,16 @@
         <a href="{% url 'home' %}">Главная</a>
         <a href="{% url 'about' %}">О нас</a>
         <a href="{% url 'article_list' %}">Статьи</a>
+        {% if user.is_authenticated %}
+            <span class="nav-user">{{ user.username }}</span>
+            <form class="nav-logout" action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Выйти</button>
+            </form>
+        {% else %}
+            <a class="nav-auth-link" href="{% url 'signup' %}">Регистрация</a>
+            <a class="nav-auth-link" href="{% url 'login' %}">Вход</a>
+        {% endif %}
     </nav>
 </header>
 

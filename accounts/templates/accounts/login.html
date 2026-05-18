@@ -1,0 +1,18 @@
+{% extends "base_layout.html" %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<main class="auth-page">
+    <section class="auth-card">
+        <h1>Login</h1>
+        <p class="auth-lead">Войдите в аккаунт, чтобы продолжить работу с сайтом.</p>
+
+        <form class="form auth-form" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </section>
+</main>
+{% endblock content %}
